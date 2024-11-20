@@ -1,0 +1,33 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/static/icons/icon_144x144.png" type="image/png">
+    <link rel="icon" href="/static/icons/icon_192x192.png" type="image/png">
+    <link rel="icon" href="/static/icons/icon_512x512.png" type="image/png">
+    <link rel="apple-touch-icon" href="/static/icons/icon_144x144.png" type="image/png">
+    <link rel="apple-touch-icon" href="/static/icons/icon_192x192.png" type="image/png">
+    <link rel="apple-touch-icon" href="/static/icons/icon_512x512.png" type="image/png">
+    <link rel="manifest" href="/static/manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("/static/sw.js").then((registration) => {
+                    console.log('サービスワーカーの登録に成功しました: ', registration.scope);
+
+                    return registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: '<Your Public Key in Base64 Format>'
+                    });
+                }).then((subscription) => {
+                    
+                }).catch(function(err) {
+                    console.log('サービスワーカーの登録に失敗しました: ', err);
+                });
+            });
+        }
+    </script>
+</head>
+<html>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+</html>

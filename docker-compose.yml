@@ -1,0 +1,15 @@
+services:
+  vapid:
+    build: ./builds
+    container_name: vapid
+    volumes:
+      - ./builds:/usr/src/builds
+    command: python3 main.py
+  pwa:
+    build: ./apps
+    container_name: pwa
+    volumes:
+      - ./apps:/usr/src/apps
+    ports:
+      - "443:443"
+    command: python3 app.py
